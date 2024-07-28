@@ -1,0 +1,15 @@
+{
+    "name": "kayqu/barbearia",
+    "autoload": {
+        "psr-4": {
+            "Kayqu\\Barbearia\\": "Barbearia/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JoaocarlosOT",
+            "email": "joaocarlosdev403@gmail.com"
+        }
+    ],
+    "require": {}
+}
