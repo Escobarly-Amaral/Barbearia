@@ -45,31 +45,39 @@
             }
         }
 
-        public function setService(){
-            $conn = $this->loadDB();
-            $conn = $this->conn;
+        public function setService(){    
+            try{
+                $conn = $this->loadDB();
+                $conn = $this->conn;
 
-            $sql = $conn->prepare("UPDATE services SET name=:name, description=:description, price=:price WHERE id = :id");
+                $sql = $conn->prepare("UPDATE services SET name=:name, description=:description, price=:price WHERE id = :id");
 
-            $id = $data['id'];
-            $description = $data['description'];
-            $name = $data['name'];
-            $price = $data['price'];
+                $id = $data['id'];
+                $description = $data['description'];
+                $name = $data['name'];
+                $price = $data['price'];
 
-            $sql->bindParam(':id', $id);
-            $sql->bindParam(':password', $password);
-            $sql->bindParam(':name', $name);
-            $sql->bindParam(':mail', $price);
-            $sql->execute();
+                $sql->bindParam(':id', $id);
+                $sql->bindParam(':password', $password);
+                $sql->bindParam(':name', $name);
+                $sql->bindParam(':mail', $price);
+                $sql->execute();
+            }catch(Exception $e){
+                echo "<pre>Erro: " . $e->getMessage() . "</pre>";
+            }
         }
 
         public function removeUser($id){
-            $conn = $this->loadDB();
-            $conn = $this->conn;
+            try{
+                $conn = $this->loadDB();
+                $conn = $this->conn;
 
-            $sql = $conn->prepare("DELETE FROM services WHERE id = :id");
-            $sql->bindParam(':id', $id);
-            $sql->execute();
+                $sql = $conn->prepare("DELETE FROM services WHERE id = :id");
+                $sql->bindParam(':id', $id);
+                $sql->execute();
+            }catch(Exception $e){
+                echo "<pre>Erro: " . $e->getMessage() . "</pre>";
+            }
         }
     }
 ?>

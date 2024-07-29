@@ -63,34 +63,38 @@
         }
 
         public function setUser($data){
-            $conn = $this->loadDB();
-            $conn = $this->conn;
+            try{
+                $conn = $this->loadDB();
+                $conn = $this->conn;
 
-            $sql = $conn->prepare("UPDATE customers SET password=:password, name=:name, email=:mail, phone=:phone, adress=:adress WHERE id = :id");
-                /*
-                    $data = [
-                        "id" => "2",
-                        "name" => "Pedro Alves",
-                        "password" => "1292",
-                        "email" => "pedro@gmail.com",
-                        "fone" => "85986562539",
-                        "adress" => "Rua Tomás n° 164",
-                    ];
-                */
-            $id = $data['id'];
-            $password = $data['password'];
-            $name = $data['name'];
-            $email = $data['email'];
-            $fone = $data['fone'];
-            $endereco = $data['adress'];
+                $sql = $conn->prepare("UPDATE customers SET password=:password, name=:name, email=:mail, phone=:phone, adress=:adress WHERE id = :id");
+                    /*
+                        $data = [
+                            "id" => "2",
+                            "name" => "Pedro Alves",
+                            "password" => "1292",
+                            "email" => "pedro@gmail.com",
+                            "fone" => "85986562539",
+                            "adress" => "Rua Tomás n° 164",
+                        ];
+                    */
+                $id = $data['id'];
+                $password = $data['password'];
+                $name = $data['name'];
+                $email = $data['email'];
+                $fone = $data['fone'];
+                $endereco = $data['adress'];
 
-            $sql->bindParam(':id', $id);
-            $sql->bindParam(':password', $password);
-            $sql->bindParam(':name', $name);
-            $sql->bindParam(':mail', $email);
-            $sql->bindParam(':phone', $fone);
-            $sql->bindParam(':adress', $endereco);
-            $sql->execute();
+                $sql->bindParam(':id', $id);
+                $sql->bindParam(':password', $password);
+                $sql->bindParam(':name', $name);
+                $sql->bindParam(':mail', $email);
+                $sql->bindParam(':phone', $fone);
+                $sql->bindParam(':adress', $endereco);
+                $sql->execute();
+            }catch(Exception $e){
+                echo "<pre>Erro: " . $e->getMessage() . "</pre>";
+            }
         }
 
         public function removeUser($id){
@@ -100,6 +104,26 @@
             $sql = $conn->prepare("DELETE FROM customers WHERE id = :id");
             $sql->bindParam(':id', $id);
             $sql->execute();
+        }
+
+        public function login($username, $password){
+            try{
+                $conn = $this->loadDB();
+                $conn = $this->conn;
+
+                $sql = $conn->prepare("SELECT password FROM customers WHERE name = :username");
+                $sql->bindParam(':username', $username);
+                $sql->execute();
+                $user = $sql->fetch_assoc();
+
+                if ($user && password_verify($password, $user['password'])) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch(Exception $e){
+                echo "<pre>Erro: " . $e->getMessage() . "</pre>";
+            }
         }
     }
 ?>
