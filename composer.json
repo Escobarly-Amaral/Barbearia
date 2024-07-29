@@ -2,7 +2,7 @@
     "name": "kayqu/barbearia",
     "autoload": {
         "psr-4": {
-            "Kayqu\\Barbearia\\": "Barbearia/"
+            "Barbearia\\": "Barbearia/"
         }
     },
     "authors": [

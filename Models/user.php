@@ -13,10 +13,11 @@
                 $result = $sql->fetchAll();
                 // echo "<pre>";
                 // print_r($result);
+                // foreach ($result as $row) {
+                //     echo '<b>NOME: </b>' . $row['name'] . '<br>' . '<b>TELEFONE: </b>' . $row['phone'] . '<br>' . '<b>EMAIL: </b>' . $row['email'] . '<br>' . '<b>ENDEREÇO: </b>' . $row['adress'] . '<br><br>';
+                // }
+                return $resulte;
 
-                foreach ($result as $row) {
-                    echo '<b>NOME: </b>' . $row['name'] . '<br>' . '<b>TELEFONE: </b>' . $row['phone'] . '<br>' . '<b>EMAIL: </b>' . $row['email'] . '<br>' . '<b>ENDEREÇO: </b>' . $row['adress'] . '<br><br>';
-                }
             }catch(Exception $e){
                 echo "<pre>Erro: " . $e->getMessage() . "</pre>";
             }
@@ -40,7 +41,7 @@
                 $name = $data['name'];
                 $email = $data['email'];
                 $fone = $data['fone'];
-                $endereco = $data['adress'];
+                $adress = $data['adress'];
 
                 $maxid = $conn->prepare("SELECT id FROM customers ORDER BY id DESC LIMIT 1");
                 $maxid->execute();
@@ -54,7 +55,7 @@
                 $sql->bindParam(':name', $name);
                 $sql->bindParam(':mail', $email);
                 $sql->bindParam(':phone', $fone);
-                $sql->bindParam(':adress', $endereco);
+                $sql->bindParam(':adress', $adress);
                 $sql->execute();
                 
             }catch(Exception $e){
