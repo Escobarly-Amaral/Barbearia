@@ -11,11 +11,6 @@
                 $sql = $conn->prepare("SELECT * FROM customers ORDER BY id");
                 $sql->execute();
                 $result = $sql->fetchAll();
-                // echo "<pre>";
-                // print_r($result);
-                // foreach ($result as $row) {
-                //     echo '<b>NOME: </b>' . $row['name'] . '<br>' . '<b>TELEFONE: </b>' . $row['phone'] . '<br>' . '<b>EMAIL: </b>' . $row['email'] . '<br>' . '<b>ENDEREÇO: </b>' . $row['adress'] . '<br><br>';
-                // }
                 return $resulte;
 
             }catch(Exception $e){
